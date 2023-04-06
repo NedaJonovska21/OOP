@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Transaction{
+    int id;
+    int sum;
+    int commission;
+    int type;
+}Transaction;
+
+int total(int sum, int commission)
+{
+    return sum+commission;
+}
+
+void readTransaction(Transaction * a)
+{
+     scanf("%d %d %d %d", &a->id, &a->sum, &a->commission, &a->type);
+}
+
+void printTransaction(Transaction a)
+{
+    printf("%d %d\n", a.id, total(a.sum, a.commission));
+
+}
+
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    Transaction a[100];
+    int f=0;
+    for(int i=0; i<n; i++)
+    {
+        readTransaction(&a[i]);
+        if(a[i].type)
+        {
+            printTransaction(a[i]);
+            f=1;
+        }
+    }
+    if(f=0)
+    {
+        printf("No credit card transaction");
+    }
+
+    return 0;
+}
