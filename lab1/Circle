@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Point
+{
+    int x;
+    int y;
+}point;
+
+typedef struct circle
+{
+    point centar;
+    int radius;
+}Circle;
+
+double Area(Circle c)
+{
+    return 3.14*c.radius*c.radius;
+}
+
+Circle largest_circle(Circle circle[], int n)
+{
+    Circle largest=circle[0];
+
+    double LargestArea=Area(circle[0]);
+
+    for(int i=1; i<n; i++)
+    {
+        double P=Area(circle[i]);
+        if(P>LargestArea)
+        {
+            LargestArea=P;
+            largest=circle[i];
+        }
+    }
+    return largest;
+}
+int main()
+{
+    int n, i;
+     scanf("%d", &n);
+
+     Circle circle[n];
+     for(i=0; i<n; i++)
+     {
+         scanf("%d %d %d", &circle[i].centar.x, &circle[i].centar.y, &circle[i].radius);
+     }
+
+     Circle largest= largest_circle(circle, n);
+     printf("Largest circle has area of: %.2lf with centre:(%d, %d)",Area(largest), largest.centar.x, largest.centar.y);
+    return 0;
+}
