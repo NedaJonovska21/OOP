@@ -1,0 +1,92 @@
+#include <iostream>
+#include <math.h>
+#include <cstring>
+
+using namespace std;
+class Ekipa
+{
+private:
+    char *ime;
+    char *stadion;
+    char *grad;
+public:
+    Ekipa(char *ime="", char *stadion="", char*grad="")
+    {
+        this->ime = new char[strlen(ime)+1];
+        this->stadion=new char [strlen(stadion)+1];
+        this->grad =new char[strlen(grad)+1];
+
+        strcpy(this->ime,ime);
+        strcpy(this->stadion, stadion);
+        strcpy(this->grad, grad);
+    }
+
+    Ekipa(const Ekipa &e)
+    {
+        this->ime = new char[strlen(e.ime)+1];
+        this->stadion=new char [strlen(e.stadion)+1];
+        this->grad =new char[strlen(e.grad)+1];
+
+        strcpy(this->ime,e.ime);
+        strcpy(this->stadion, e.stadion);
+        strcpy(this->grad, e.grad);
+    }
+
+    ~Ekipa()
+    {
+        delete []ime;
+        delete []stadion;
+        delete []grad;
+    }
+
+
+    Ekipa &operator=(const Ekipa &e)
+    {
+        if(this != &e)
+        {
+            delete []ime;
+            delete []stadion;
+            delete []grad;
+        }
+        this->ime = new char[strlen(e.ime)+1];
+        this->stadion=new char [strlen(e.stadion)+1];
+        this->grad =new char[strlen(e.grad)+1];
+
+        strcpy(this->ime,e.ime);
+        strcpy(this->stadion, e.stadion);
+        strcpy(this->grad, e.grad);
+
+        return  *this;
+    }
+
+    void print()
+    {
+     cout<<"Team name: "<<ime<<" which plays on stadium: "<<stadion<<" in the city: "<<grad<<endl;
+    }
+};
+
+
+int main()
+{
+
+    int n;
+    cin>>n;
+    Ekipa *ekipi= new Ekipa[n];
+
+    char ime[100];
+    char stadion[100];
+    char grad[100];
+    for(int i=0; i<n; i++)
+    {
+        cin>>ime>>stadion>>grad;
+        ekipi[i]=Ekipa(ime, stadion, grad);
+    }
+
+    for(int i=0; i<n; i++)
+    {
+        ekipi[i].print();
+    }
+
+
+return 0;
+}
